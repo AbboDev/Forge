@@ -1,0 +1,6 @@
+phalcon.bat
+
+cache/*
+!cache/.gitkeep
+
+app/config/config.php
