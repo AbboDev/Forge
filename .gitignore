@@ -4,3 +4,8 @@ cache/*
 !cache/.gitkeep
 
 app/config/config.php
+
+composer.phar
+/vendor/
+
+/node_modules/
