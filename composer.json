@@ -1,0 +1,38 @@
+{
+  "name": "crystalware/forge",
+  "type": "project",
+  "description": "The Laravel Framework.",
+  "keywords": [
+    "framework",
+    "phalcon",
+    "crystalware",
+    "forge",
+    "api",
+    "rest",
+    "cpu",
+    "ram",
+    "hd",
+    "case",
+    "hard disk",
+    "ssd"
+  ],
+  "config": {
+    "optimize-autoloader": true,
+    "preferred-install": "dist",
+    "sort-packages": true
+  },
+
+  "require-dev": {
+    "zachleigh/yarak": "^1.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "Forge\\": "app/"
+    },
+    "classmap": [
+      "app/database"
+    ]
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
