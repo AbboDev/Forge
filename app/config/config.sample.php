@@ -17,9 +17,18 @@ return new \Phalcon\Config([
     ],
 
     'application' => [
+        'appDir'         => APP_PATH . '/',
+        'consoleDir'     => APP_PATH . '/console/',
+        'commandsDir'    => APP_PATH . '/console/commands',
+        'databaseDir'    => APP_PATH . '/database/',
+        'migrationsDir'  => APP_PATH . '/database/migrations/',
+
         'modelsDir'      => APP_PATH . '/models/',
-        'migrationsDir'  => APP_PATH . '/migrations/',
         'viewsDir'       => APP_PATH . '/views/',
         'baseUri'        => '/forge/',
+    ],
+
+    'namespaces' => [
+        'root' => '',
     ]
 ]);

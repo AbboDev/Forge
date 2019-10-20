@@ -6,14 +6,14 @@ use Phalcon\Mvc\Url as UrlResolver;
 /**
  * Shared configuration service
  */
-$di->setShared('config', function () {
+$di->setShared('config', function() {
     return include APP_PATH . "/config/config.php";
 });
 
 /**
  * Sets the view component
  */
-$di->setShared('view', function () {
+$di->setShared('view', function() {
     $config = $this->getConfig();
 
     $view = new View();
@@ -24,7 +24,7 @@ $di->setShared('view', function () {
 /**
  * The URL component is used to generate all kind of urls in the application
  */
-$di->setShared('url', function () {
+$di->setShared('url', function() {
     $config = $this->getConfig();
 
     $url = new UrlResolver();
@@ -35,7 +35,7 @@ $di->setShared('url', function () {
 /**
  * Database connection is created based in the parameters defined in the configuration file
  */
-$di->setShared('db', function () {
+$di->setShared('db', function() {
     $config = $this->getConfig();
 
     $class = 'Phalcon\Db\Adapter\Pdo\\' . $config->database->adapter;
@@ -56,3 +56,6 @@ $di->setShared('db', function () {
     return $connection;
 });
 
+$di->setShared('yarak', function() {
+    return new Yarak\Kernel();
+});
