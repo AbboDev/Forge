@@ -86,7 +86,7 @@ class CreateCpuTable implements Migration
                         ]
                     ),
                     new Column(
-                        'l1_cache_data',
+                        'l1_cache_data', // using kilobytes as unit
                         [
                             'type' => Column::TYPE_INTEGER, // tinyint
                             'unsigned' => true,
@@ -95,7 +95,7 @@ class CreateCpuTable implements Migration
                         ]
                     ),
                     new Column(
-                        'l1_cache_instruction',
+                        'l1_cache_instruction', // using kilobytes as unit
                         [
                             'type' => Column::TYPE_INTEGER, // tinyint
                             'unsigned' => true,
@@ -104,7 +104,7 @@ class CreateCpuTable implements Migration
                         ]
                     ),
                     new Column(
-                        'l2_cache',
+                        'l2_cache', // using kilobytes as unit
                         [
                             'type' => Column::TYPE_INTEGER, // smallint
                             'unsigned' => true,
@@ -113,7 +113,7 @@ class CreateCpuTable implements Migration
                         ]
                     ),
                     new Column(
-                        'l3_cache',
+                        'l3_cache', // using kilobytes as unit
                         [
                             'type' => Column::TYPE_INTEGER, // smallint
                             'unsigned' => true,
@@ -122,7 +122,7 @@ class CreateCpuTable implements Migration
                         ]
                     ),
                     new Column(
-                        'clock_speed',
+                        'clock_speed', // using megahertz as unit
                         [
                             'type' => Column::TYPE_INTEGER, // smallint
                             'unsigned' => true,
@@ -131,7 +131,7 @@ class CreateCpuTable implements Migration
                         ]
                     ),
                     new Column(
-                        'turbo_clock_speed',
+                        'turbo_clock_speed', // using megahertz as unit
                         [
                             'type' => Column::TYPE_INTEGER, // smallint
                             'unsigned' => true,
