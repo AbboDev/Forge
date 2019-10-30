@@ -13,7 +13,7 @@ $loader->registerNamespaces([
     'Forge' => $config->application->appDir,
 
     'Forge\Models' => $config->application->modelsDir,
-    // 'Forge\Controller' => $config->application->controllersDir,
+    'Forge\Controllers' => $config->application->controllersDir,
 
     'Forge\Console' => $config->application->consoleDir,
     'Forge\Console\Command' => $config->application->commandsDir,
