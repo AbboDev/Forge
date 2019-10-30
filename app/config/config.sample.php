@@ -23,6 +23,7 @@ return new \Phalcon\Config([
         'databaseDir'    => APP_PATH . '/database/',
         'migrationsDir'  => APP_PATH . '/database/migrations/',
 
+        'controllersDir' => APP_PATH . '/controllers/',
         'modelsDir'      => APP_PATH . '/models/',
         'viewsDir'       => APP_PATH . '/views/',
         'baseUri'        => '/forge/',
