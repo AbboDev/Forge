@@ -9,28 +9,28 @@ class ManufacturerController extends ApiController
         echo "index()";
     }
 
-    public function getSingleByName($name)
+    public function getSingleByName($name, $format = 'json')
     {
-        return array("getSingleByName({$name})");
+        return array("getSingleByName", $name, $format);
     }
 
-    public function getInfoByName($name)
+    public function getInfoByName($name, $format = 'json')
     {
-        return array("getInfoByName({$name})");
+        return array("getInfoByName", $name, $format);
     }
 
-    public function getSingleById($id)
+    public function getSingleById($id, $format = 'json')
     {
-        return array("getSingleById({$id})");
+        return array("getSingleById", $id, $format);
     }
 
-    public function getInfoById($id)
+    public function getInfoById($id, $format = 'json')
     {
-        return array("getInfoById({$id})");
+        return array("getInfoById", $id, $format);
     }
 
-    public function getList()
+    public function getList($format = 'json')
     {
-        return array("getList()");
+        return array("getList", $format);
     }
 }

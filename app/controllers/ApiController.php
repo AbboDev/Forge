@@ -6,13 +6,13 @@ namespace Forge\Controllers;
 
 abstract class ApiController extends \Phalcon\Mvc\Controller
 {
-    abstract public function getSingleByName($name);
+    abstract public function getSingleByName($name, $format);
 
-    abstract public function getInfoByName($name);
+    abstract public function getInfoByName($name, $format);
 
-    abstract public function getSingleById($id);
+    abstract public function getSingleById($id, $format);
 
-    abstract public function getInfoById($id);
+    abstract public function getInfoById($id, $format);
 
-    abstract public function getList();
+    abstract public function getList($format);
 }
