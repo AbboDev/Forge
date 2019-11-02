@@ -40,6 +40,11 @@ try {
     /**
      * Include Application
      */
+    include APP_PATH . '/config/events.php';
+
+    /**
+     * Include Application
+     */
     include APP_PATH . '/app.php';
 
     /**
