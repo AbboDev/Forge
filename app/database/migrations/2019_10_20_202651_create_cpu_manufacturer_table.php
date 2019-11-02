@@ -16,7 +16,7 @@ class CreateCpuManufacturerTable implements Migration
     public function up(Pdo $connection)
     {
         $connection->createTable(
-            'cpu_manufacturer',
+            'manufacturer',
             null,
             [
                 'columns' => [

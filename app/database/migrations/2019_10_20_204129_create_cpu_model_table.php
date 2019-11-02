@@ -90,7 +90,7 @@ class CreateCpuModelTable implements Migration
                     new Reference(
                         'cpu_model_manufacturer_fk',
                         [
-                            'referencedTable' => 'cpu_manufacturer',
+                            'referencedTable' => 'manufacturer',
                             'referencedSchema' => 'forge',
                             'columns' => ['manufacturer'],
                             'referencedColumns' => ['id'],
