@@ -62,6 +62,6 @@ class CreateCpuManufacturerTable implements Migration
      */
     public function down(Pdo $connection)
     {
-        $connection->dropTable('cpu_manufacturer');
+        $connection->dropTable('manufacturer');
     }
 }
