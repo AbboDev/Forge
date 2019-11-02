@@ -2,6 +2,8 @@
 
 namespace Forge\Controllers;
 
+use Forge\Models\Manufacturer;
+
 class ManufacturerController extends ApiController
 {
     public function index()
@@ -11,26 +13,68 @@ class ManufacturerController extends ApiController
 
     public function getSingleByName($name, $format = 'json')
     {
-        return array("getSingleByName", $name, $format);
+        $get = Manufacturer::findFirstByManufacturer($name);
+
+        if ($get !== false) {
+            return $get->toArray();
+        }
+
+        return array(
+            'error' => "No record not found for key '{$name}'",
+            'name' => $name
+        );
     }
 
     public function getInfoByName($name, $format = 'json')
     {
-        return array("getInfoByName", $name, $format);
+        $get = Manufacturer::findFirstByManufacturer($name);
+
+        if ($get !== false) {
+            return $get->toArray();
+        }
+
+        return array(
+            'error' => "No record not found for key '{$name}'",
+            'name' => $name
+        );
     }
 
     public function getSingleById($id, $format = 'json')
     {
-        return array("getSingleById", $id, $format);
+        $get = Manufacturer::findFirst($id);
+
+        if ($get !== false) {
+            return $get->toArray();
+        }
+
+        return array(
+            'error' => "No record not found for id '{$id}'",
+            'id' => $id
+        );
     }
 
     public function getInfoById($id, $format = 'json')
     {
-        return array("getInfoById", $id, $format);
+        $get = Manufacturer::findFirst($id);
+
+        if ($get !== false) {
+            return $get->toArray();
+        }
+
+        return array(
+            'error' => "No record not found for id '{$id}'",
+            'id' => $id
+        );
     }
 
     public function getList($format = 'json')
     {
-        return array("getList", $format);
+        $get = Manufacturer::find();
+
+        if ($get !== false) {
+            return $get->toArray();
+        }
+
+        return array('error' => "Record not registered yet");
     }
 }
