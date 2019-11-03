@@ -69,7 +69,9 @@ class ManufacturerController extends ApiController
 
     public function getList($format = 'json')
     {
-        $get = Manufacturer::find();
+        $get = Manufacturer::find([
+            'order' => 'id ASC'
+        ]);
 
         if ($get !== false) {
             return $get->toArray();
