@@ -18,7 +18,7 @@ $manufacturerCollection = call_user_func(function($formats) use ($config) {
     );
 
     foreach ($routes as $path => $method) {
-        $collection->get("{$path}/?{format:({$formats})?}", $method);
+        $collection->get("{$path}\.{format:({$formats})}", $method);
     }
 
     return $collection;
