@@ -7,7 +7,7 @@ $formats = implode('|', $config->api->formats->toArray());
 $manufacturerCollection = call_user_func(function($formats) use ($config) {
     $collection = new MicroCollection();
     $collection->setHandler('Forge\Controllers\ManufacturerController', true);
-    $collection->setPrefix('/manufacturer');
+    $collection->setPrefix('/manufacturers');
 
     $collection->get('/', 'index');
 
