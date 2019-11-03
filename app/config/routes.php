@@ -9,18 +9,16 @@ $manufacturerCollection = call_user_func(function($formats) use ($config) {
     $collection->setHandler('Forge\Controllers\ManufacturerController', true);
     $collection->setPrefix('/manufacturers');
 
-    $collection->get('/', 'index');
-
     $routes = array(
-        '{name:([a-zA-Z0-9\_\-]+)}' => 'getSingleByName',
-        '{name:([a-zA-Z0-9\_\-]+)}/info' => 'getInfoByName',
-        '{id:([0-9]+)}' => 'getSingleById',
-        '{id:([0-9]+)}/info' => 'getInfoById',
-        $config->api->all_alias => 'getList',
+        '/{name:([a-zA-Z0-9\_\-]+)}' => 'getSingleByName',
+        '/{name:([a-zA-Z0-9\_\-]+)}/info' => 'getInfoByName',
+        '/{id:([0-9]+)}' => 'getSingleById',
+        '/{id:([0-9]+)}/info' => 'getInfoById',
+        '' => 'getList',
     );
 
     foreach ($routes as $path => $method) {
-        $collection->get("/{$path}/?{format:({$formats})?}", $method);
+        $collection->get("{$path}/?{format:({$formats})?}", $method);
     }
 
     return $collection;
