@@ -6,11 +6,6 @@ use Forge\Models\Manufacturer;
 
 class ManufacturerController extends ApiController
 {
-    public function index()
-    {
-        echo "index()";
-    }
-
     public function getSingleByName($name, $format = 'json')
     {
         $get = Manufacturer::findFirstByManufacturer($name);
