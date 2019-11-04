@@ -56,8 +56,6 @@ $eventsManager->attach(
 
         if (is_array($return)) {
             $app->response->setContent(json_encode($return));
-        } elseif (!strlen($return)) {
-            $app->response->setStatusCode('204', 'No Content');
         } else {
             // Unexpected response
             throw new Exception('Bad Response');
