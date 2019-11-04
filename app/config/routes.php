@@ -1,93 +1,25 @@
 <?php
 
-use Phalcon\Mvc\Micro\Collection as MicroCollection;
-
-$formats = implode('|', $config->api->formats->toArray());
-
-$manufacturerCollection = call_user_func(function($formats) use ($config) {
-    $collection = new MicroCollection();
-    $collection->setHandler('Forge\Controllers\ManufacturerController', true);
-    $collection->setPrefix('/manufacturers');
-
-    $routes = array(
-        '/{name:([a-zA-Z0-9\_\-]+)}' => 'getSingleByName',
-        '/{name:([a-zA-Z0-9\_\-]+)}/info' => 'getInfoByName',
-        '/{id:([0-9]+)}' => 'getSingleById',
-        '/{id:([0-9]+)}/info' => 'getInfoById',
-        '' => 'getList',
-    );
-
-    foreach ($routes as $path => $method) {
-        $collection->get("{$path}\.{format:({$formats})}", $method);
-    }
-
-    return $collection;
-}, $formats);
+$manufacturerCollection = new \Forge\Routes\ApiRoute();
+$manufacturerCollection->setHandler('ManufacturerController');
+$manufacturerCollection->setPrefix('/manufacturers');
 
 $app->mount($manufacturerCollection);
 
-$cpuSocketPackageCollection = call_user_func(function($formats) use ($config) {
-    $collection = new MicroCollection();
-    $collection->setHandler('Forge\Controllers\CpuSocketPackageController', true);
-    $collection->setPrefix('/cpus/sockets/packages');
-
-    $routes = array(
-        '/{name:([a-zA-Z0-9\_\-]+)}' => 'getSingleByName',
-        '/{name:([a-zA-Z0-9\_\-]+)}/info' => 'getInfoByName',
-        '/{id:([0-9]+)}' => 'getSingleById',
-        '/{id:([0-9]+)}/info' => 'getInfoById',
-        '' => 'getList',
-    );
-
-    foreach ($routes as $path => $method) {
-        $collection->get("{$path}\.{format:({$formats})}", $method);
-    }
-
-    return $collection;
-}, $formats);
+$cpuSocketPackageCollection = new \Forge\Routes\ApiRoute();
+$cpuSocketPackageCollection->setHandler('CpuSocketPackageController');
+$cpuSocketPackageCollection->setPrefix('/cpus/sockets/packages');
 
 $app->mount($cpuSocketPackageCollection);
 
-$cpuCodenameCollection = call_user_func(function($formats) use ($config) {
-    $collection = new MicroCollection();
-    $collection->setHandler('Forge\Controllers\CpuCodenameController', true);
-    $collection->setPrefix('/cpus/codenames');
-
-    $routes = array(
-        '/{name:([a-zA-Z0-9\_\-]+)}' => 'getSingleByName',
-        '/{name:([a-zA-Z0-9\_\-]+)}/info' => 'getInfoByName',
-        '/{id:([0-9]+)}' => 'getSingleById',
-        '/{id:([0-9]+)}/info' => 'getInfoById',
-        '' => 'getList',
-    );
-
-    foreach ($routes as $path => $method) {
-        $collection->get("{$path}\.{format:({$formats})}", $method);
-    }
-
-    return $collection;
-}, $formats);
+$cpuCodenameCollection = new \Forge\Routes\ApiRoute();
+$cpuCodenameCollection->setHandler('CpuCodenameController');
+$cpuCodenameCollection->setPrefix('/cpus/codenames');
 
 $app->mount($cpuCodenameCollection);
 
-$cpuSeriesCollection = call_user_func(function($formats) use ($config) {
-    $collection = new MicroCollection();
-    $collection->setHandler('Forge\Controllers\CpuSeriesController', true);
-    $collection->setPrefix('/cpus/series');
-
-    $routes = array(
-        '/{name:([a-zA-Z0-9\_\-]+)}' => 'getSingleByName',
-        '/{name:([a-zA-Z0-9\_\-]+)}/info' => 'getInfoByName',
-        '/{id:([0-9]+)}' => 'getSingleById',
-        '/{id:([0-9]+)}/info' => 'getInfoById',
-        '' => 'getList',
-    );
-
-    foreach ($routes as $path => $method) {
-        $collection->get("{$path}\.{format:({$formats})}", $method);
-    }
-
-    return $collection;
-}, $formats);
+$cpuSeriesCollection = new \Forge\Routes\ApiRoute();
+$cpuSeriesCollection->setHandler('CpuSeriesController');
+$cpuSeriesCollection->setPrefix('/cpus/series');
 
 $app->mount($cpuSeriesCollection);

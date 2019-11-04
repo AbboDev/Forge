@@ -35,6 +35,9 @@ return new \Phalcon\Config([
     ]
 
     'api' => [
+        'versions' => [
+            'last' => 1
+        ],
         'formats' => [
             'json',
             'xml',
