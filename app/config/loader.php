@@ -15,6 +15,8 @@ $loader->registerNamespaces([
     'Forge\Models' => $config->application->modelsDir,
     'Forge\Controllers' => $config->application->controllersDir,
 
+    'Forge\Routes' => $config->application->routesDir,
+
     'Forge\Console' => $config->application->consoleDir,
     'Forge\Console\Command' => $config->application->commandsDir,
     'Forge\Database' => $config->application->databaseDir,
