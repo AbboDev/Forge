@@ -13,6 +13,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(ManufacturerSeeder::class);
 
+        $this->call(CpuSeriesSeeder::class);
         $this->call(CpuCodenameSeeder::class);
         $this->call(CpuSocketPackageSeeder::class);
     }

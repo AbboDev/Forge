@@ -69,3 +69,25 @@ $cpuCodenameCollection = call_user_func(function($formats) use ($config) {
 }, $formats);
 
 $app->mount($cpuCodenameCollection);
+
+$cpuSeriesCollection = call_user_func(function($formats) use ($config) {
+    $collection = new MicroCollection();
+    $collection->setHandler('Forge\Controllers\CpuSeriesController', true);
+    $collection->setPrefix('/cpus/series');
+
+    $routes = array(
+        '/{name:([a-zA-Z0-9\_\-]+)}' => 'getSingleByName',
+        '/{name:([a-zA-Z0-9\_\-]+)}/info' => 'getInfoByName',
+        '/{id:([0-9]+)}' => 'getSingleById',
+        '/{id:([0-9]+)}/info' => 'getInfoById',
+        '' => 'getList',
+    );
+
+    foreach ($routes as $path => $method) {
+        $collection->get("{$path}\.{format:({$formats})}", $method);
+    }
+
+    return $collection;
+}, $formats);
+
+$app->mount($cpuSeriesCollection);
