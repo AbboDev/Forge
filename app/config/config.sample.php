@@ -32,4 +32,16 @@ return new \Phalcon\Config([
     'namespaces' => [
         'root' => '',
     ]
+
+    'api' => [
+        'formats' => [
+            'json',
+            'xml',
+            'txt',
+            'html',
+            'md',
+            'csv',
+            'yaml'
+        ]
+    ]
 ]);
