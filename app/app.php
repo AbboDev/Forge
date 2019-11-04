@@ -5,6 +5,20 @@
  * @var \Phalcon\Mvc\Micro $app
  */
 
+function config() {
+    $args = func_get_args();
+    $config = \Phalcon\Di::getDefault()->getShared('config');
+
+    if (empty($args)) {
+       return $config;
+    }
+
+    return call_user_func_array(
+        [$config, 'path'],
+        $args
+    );
+}
+
 /**
  * Add your routes here
  */
