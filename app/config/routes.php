@@ -6,6 +6,12 @@ $manufacturerCollection->setPrefix('/manufacturers');
 
 $app->mount($manufacturerCollection);
 
+$cpuSocketCollection = new \Forge\Routes\ApiRoute();
+$cpuSocketCollection->setHandler('CpuSocketController');
+$cpuSocketCollection->setPrefix('/cpus/sockets');
+
+$app->mount($cpuSocketCollection);
+
 $cpuSocketPackageCollection = new \Forge\Routes\ApiRoute();
 $cpuSocketPackageCollection->setHandler('CpuSocketPackageController');
 $cpuSocketPackageCollection->setPrefix('/cpus/sockets/packages');

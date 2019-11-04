@@ -15,6 +15,8 @@ class DatabaseSeeder extends Seeder
 
         $this->call(CpuSeriesSeeder::class);
         $this->call(CpuCodenameSeeder::class);
+
         $this->call(CpuSocketPackageSeeder::class);
+        $this->call(CpuSocketSeeder::class);
     }
 }
