@@ -6,7 +6,7 @@ use Phalcon\Db\Reference;
 use Phalcon\Db\Adapter\Pdo;
 use Yarak\Migrations\Migration;
 
-class CreateCpuSocketTable implements Migration
+class CreateCpuPriceTable implements Migration
 {
     /**
      * Run the migration.
@@ -16,78 +16,65 @@ class CreateCpuSocketTable implements Migration
     public function up(Pdo $connection)
     {
         $connection->createTable(
-            'cpu_socket',
+            'cpu_price',
             null,
             [
                 'columns' => [
                     new Column(
                         'id',
                         [
-                            'type' => Column::TYPE_INTEGER, // tinyint
+                            'type' => Column::TYPE_INTEGER, // mediumint
                             'unsigned' => true,
                             'notNull' => true,
                             'autoIncrement' => true,
-                            'size' => 3,
+                            'size' => 8,
                             'first' => true
                         ]
                     ),
                     new Column(
-                        'socket',
+                        'cpu',
                         [
-                            'type' => Column::TYPE_VARCHAR,
+                            'type' => Column::TYPE_INTEGER,
+                            'unsigned' => true,
                             'notNull' => true,
-                            'size' => 15,
+                            'size' => 5,
                             'after' => 'id'
                         ]
                     ),
                     new Column(
-                        'alias',
+                        'price',
                         [
-                            'type' => Column::TYPE_VARCHAR,
-                            'size' => 15,
-                            'after' => 'socket'
-                        ]
-                    ),
-                    new Column(
-                        'lithography',
-                        [
-                            'type' => Column::TYPE_INTEGER, // smallint
-                            'unsigned' => true,
-                            'size' => 5,
-                            'after' => 'alias'
-                        ]
-                    ),
-                    new Column(
-                        'pin',
-                        [
-                            'type' => Column::TYPE_INTEGER, // smallint
-                            'unsigned' => true,
-                            'size' => 5,
-                            'after' => 'lithography'
-                        ]
-                    ),
-                    new Column(
-                        'package',
-                        [
-                            'type' => Column::TYPE_INTEGER, // enum
+                            'type' => Column::TYPE_DECIMAL,
+                            'default' => "00.00",
                             'unsigned' => true,
                             'notNull' => true,
-                            'size' => 5,
-                            'after' => 'pin'
+                            'size' => 4,
+                            'scale' => 2,
+                            'after' => 'cpu'
+                        ]
+                    ),
+                    new Column(
+                        'seller',
+                        [
+                            'type' => Column::TYPE_VARCHAR,
+                            'default' => "Unknown",
+                            'notNull' => true,
+                            'size' => 30,
+                            'after' => 'price'
                         ]
                     )
                 ],
                 'indexes' => [
                     new Index('PRIMARY', ['id'], 'PRIMARY'),
-                    new Index('cpu_socket_package_fk', ['package'], null),
+                    new Index('cpu_price_fk', ['cpu'], null),
                 ],
                 'references' => [
                     new Reference(
-                        'cpu_socket_package_fk',
+                        'cpu_price_fk',
                         [
-                            'referencedTable' => 'cpu_socket_package',
+                            'referencedTable' => 'cpu',
                             'referencedSchema' => 'forge',
-                            'columns' => ['package'],
+                            'columns' => ['cpu'],
                             'referencedColumns' => ['id'],
                             'onUpdate' => 'CASCADE',
                             'onDelete' => 'CASCADE'
@@ -111,6 +98,6 @@ class CreateCpuSocketTable implements Migration
      */
     public function down(Pdo $connection)
     {
-        $connection->dropTable('cpu_socket');
+        $connection->dropTable('cpu_price');
     }
 }

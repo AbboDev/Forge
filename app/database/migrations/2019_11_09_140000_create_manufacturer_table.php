@@ -6,7 +6,7 @@ use Phalcon\Db\Reference;
 use Phalcon\Db\Adapter\Pdo;
 use Yarak\Migrations\Migration;
 
-class CreateCpuGenerationTable implements Migration
+class CreateManufacturerTable implements Migration
 {
     /**
      * Run the migration.
@@ -16,14 +16,14 @@ class CreateCpuGenerationTable implements Migration
     public function up(Pdo $connection)
     {
         $connection->createTable(
-            'cpu_generation',
+            'manufacturer',
             null,
             [
                 'columns' => [
                     new Column(
                         'id',
                         [
-                            'type' => Column::TYPE_INTEGER, // tinyint
+                            'type' => Column::TYPE_INTEGER,
                             'unsigned' => true,
                             'notNull' => true,
                             'autoIncrement' => true,
@@ -32,26 +32,18 @@ class CreateCpuGenerationTable implements Migration
                         ]
                     ),
                     new Column(
-                        'generation',
+                        'manufacturer',
                         [
                             'type' => Column::TYPE_VARCHAR,
                             'notNull' => true,
                             'size' => 30,
                             'after' => 'id'
                         ]
-                    ),
-                    new Column(
-                        'series',
-                        [
-                            'type' => Column::TYPE_VARCHAR,
-                            'size' => 30,
-                            'after' => 'generation'
-                        ]
                     )
                 ],
                 'indexes' => [
                     new Index('PRIMARY', ['id'], 'PRIMARY'),
-                    new Index('generation', ['generation', 'series'], 'UNIQUE')
+                    new Index('manufacturer', ['manufacturer'], 'UNIQUE')
                 ],
                 'options' => [
                     'TABLE_TYPE' => 'BASE TABLE',
@@ -70,6 +62,6 @@ class CreateCpuGenerationTable implements Migration
      */
     public function down(Pdo $connection)
     {
-        $connection->dropTable('cpu_generation');
+        $connection->dropTable('manufacturer');
     }
 }

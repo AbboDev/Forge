@@ -6,7 +6,7 @@ use Phalcon\Db\Reference;
 use Phalcon\Db\Adapter\Pdo;
 use Yarak\Migrations\Migration;
 
-class CreateCpuModelTable implements Migration
+class CreateCpuGenerationTable implements Migration
 {
     /**
      * Run the migration.
@@ -16,14 +16,14 @@ class CreateCpuModelTable implements Migration
     public function up(Pdo $connection)
     {
         $connection->createTable(
-            'cpu_model',
+            'cpu_generation',
             null,
             [
                 'columns' => [
                     new Column(
                         'id',
                         [
-                            'type' => Column::TYPE_INTEGER, // smallint
+                            'type' => Column::TYPE_INTEGER,
                             'unsigned' => true,
                             'notNull' => true,
                             'autoIncrement' => true,
@@ -32,9 +32,9 @@ class CreateCpuModelTable implements Migration
                         ]
                     ),
                     new Column(
-                        'manufacturer',
+                        'codename',
                         [
-                            'type' => Column::TYPE_INTEGER, // enum
+                            'type' => Column::TYPE_INTEGER,
                             'unsigned' => true,
                             'notNull' => true,
                             'size' => 3,
@@ -42,75 +42,35 @@ class CreateCpuModelTable implements Migration
                         ]
                     ),
                     new Column(
-                        'generation',
+                        'series',
                         [
-                            'type' => Column::TYPE_INTEGER, // tinyint
+                            'type' => Column::TYPE_INTEGER,
                             'unsigned' => true,
                             'notNull' => true,
-                            'size' => 3,
-                            'after' => 'manufacturer'
-                        ]
-                    ),
-                    new Column(
-                        'codename',
-                        [
-                            'type' => Column::TYPE_INTEGER, // tinyint
-                            'unsigned' => true,
-                            'notNull' => true,
-                            'size' => 3,
-                            'after' => 'generation'
-                        ]
-                    ),
-                    new Column(
-                        'socket',
-                        [
-                            'type' => Column::TYPE_INTEGER, // tinyint
-                            'unsigned' => true,
                             'size' => 3,
                             'after' => 'codename'
                         ]
                     ),
                     new Column(
-                        'released_date',
+                        'socket',
                         [
-                            'type' => Column::TYPE_DATE,
-                            'size' => 1,
-                            'after' => 'socket'
+                            'type' => Column::TYPE_INTEGER,
+                            'unsigned' => true,
+                            'notNull' => true,
+                            'size' => 3,
+                            'after' => 'series'
                         ]
                     )
                 ],
                 'indexes' => [
                     new Index('PRIMARY', ['id'], 'PRIMARY'),
-                    new Index('cpu_model_manufacturer_fk', ['manufacturer'], null),
-                    new Index('cpu_model_generation_fk', ['generation'], null),
-                    new Index('cpu_model_codename_fk', ['codename'], null),
-                    new Index('cpu_model_socket_fk', ['socket'], null)
+                    new Index('cpu_generation_codename_fk', ['codename'], null),
+                    new Index('cpu_generation_series_fk', ['series'], null),
+                    new Index('cpu_generation_socket_fk', ['socket'], null)
                 ],
                 'references' => [
                     new Reference(
-                        'cpu_model_manufacturer_fk',
-                        [
-                            'referencedTable' => 'cpu_manufacturer',
-                            'referencedSchema' => 'forge',
-                            'columns' => ['manufacturer'],
-                            'referencedColumns' => ['id'],
-                            'onUpdate' => 'CASCADE',
-                            'onDelete' => 'CASCADE'
-                        ]
-                    ),
-                    new Reference(
-                        'cpu_model_generation_fk',
-                        [
-                            'referencedTable' => 'cpu_generation',
-                            'referencedSchema' => 'forge',
-                            'columns' => ['generation'],
-                            'referencedColumns' => ['id'],
-                            'onUpdate' => 'CASCADE',
-                            'onDelete' => 'CASCADE'
-                        ]
-                    ),
-                    new Reference(
-                        'cpu_model_codename_fk',
+                        'cpu_generation_codename_fk',
                         [
                             'referencedTable' => 'cpu_codename',
                             'referencedSchema' => 'forge',
@@ -121,7 +81,18 @@ class CreateCpuModelTable implements Migration
                         ]
                     ),
                     new Reference(
-                        'cpu_model_socket_fk',
+                        'cpu_generation_series_fk',
+                        [
+                            'referencedTable' => 'cpu_series',
+                            'referencedSchema' => 'forge',
+                            'columns' => ['series'],
+                            'referencedColumns' => ['id'],
+                            'onUpdate' => 'CASCADE',
+                            'onDelete' => 'CASCADE'
+                        ]
+                    ),
+                    new Reference(
+                        'cpu_generation_socket_fk',
                         [
                             'referencedTable' => 'cpu_socket',
                             'referencedSchema' => 'forge',
@@ -149,6 +120,6 @@ class CreateCpuModelTable implements Migration
      */
     public function down(Pdo $connection)
     {
-        $connection->dropTable('cpu_model');
+        $connection->dropTable('cpu_generation');
     }
 }

@@ -6,7 +6,7 @@ use Phalcon\Db\Reference;
 use Phalcon\Db\Adapter\Pdo;
 use Yarak\Migrations\Migration;
 
-class CreateCpuCodenameTable implements Migration
+class CreateCpuSeriesTable implements Migration
 {
     /**
      * Run the migration.
@@ -16,14 +16,14 @@ class CreateCpuCodenameTable implements Migration
     public function up(Pdo $connection)
     {
         $connection->createTable(
-            'cpu_codename',
+            'cpu_series',
             null,
             [
                 'columns' => [
                     new Column(
                         'id',
                         [
-                            'type' => Column::TYPE_INTEGER, // tinyint
+                            'type' => Column::TYPE_INTEGER,
                             'unsigned' => true,
                             'notNull' => true,
                             'autoIncrement' => true,
@@ -32,18 +32,26 @@ class CreateCpuCodenameTable implements Migration
                         ]
                     ),
                     new Column(
-                        'codename',
+                        'series',
                         [
                             'type' => Column::TYPE_VARCHAR,
                             'notNull' => true,
                             'size' => 30,
                             'after' => 'id'
                         ]
+                    ),
+                    new Column(
+                        'released_date',
+                        [
+                            'type' => Column::TYPE_DATE,
+                            'size' => 1,
+                            'after' => 'series'
+                        ]
                     )
                 ],
                 'indexes' => [
                     new Index('PRIMARY', ['id'], 'PRIMARY'),
-                    new Index('codename', ['codename'], 'UNIQUE')
+                    new Index('series', ['series'], 'UNIQUE')
                 ],
                 'options' => [
                     'TABLE_TYPE' => 'BASE TABLE',
@@ -62,6 +70,6 @@ class CreateCpuCodenameTable implements Migration
      */
     public function down(Pdo $connection)
     {
-        $connection->dropTable('cpu_codename');
+        $connection->dropTable('cpu_series');
     }
 }
