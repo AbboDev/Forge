@@ -34,30 +34,44 @@ class CpuMeta extends IdentificableModel
     /**
      *
      * @var integer
-     * @Column(column="l1_cache_data", type="integer", length=3, nullable=true)
+     * @Column(column="l1_cache_core", type="integer", length=3, nullable=true)
      */
-    protected $l1CacheData;
+    protected $l1CacheCore;
 
     /**
      *
      * @var integer
-     * @Column(column="l1_cache_instruction", type="integer", length=3, nullable=true)
+     * @Column(column="l1_cache_shared", type="integer", length=3, nullable=true)
      */
-    protected $l1CacheInstruction;
+    protected $l1CacheShared;
 
     /**
      *
      * @var integer
-     * @Column(column="l2_cache", type="integer", length=5, nullable=true)
+     * @Column(column="l2_cache_core", type="integer", length=5, nullable=true)
      */
-    protected $l2Cache;
+    protected $l2CacheCore;
 
     /**
      *
      * @var integer
-     * @Column(column="l3_cache", type="integer", length=5, nullable=true)
+     * @Column(column="l2_cache_shared", type="integer", length=5, nullable=true)
      */
-    protected $l3Cache;
+    protected $l2CacheShared;
+
+    /**
+     *
+     * @var integer
+     * @Column(column="l3_cache_core", type="integer", length=5, nullable=true)
+     */
+    protected $l3CacheCore;
+
+    /**
+     *
+     * @var integer
+     * @Column(column="l3_cache_shared", type="integer", length=5, nullable=true)
+     */
+    protected $l3CacheShared;
 
     /**
      *
@@ -100,53 +114,79 @@ class CpuMeta extends IdentificableModel
     }
 
     /**
-     * Method to set the value of field threads
+     * Method to set the value of field threads_shared
      *
-     * @param integer $threads
+     * @param integer $threadsShared
      * @return $this
      */
-    public function setThreads($threads)
+    public function setThreadsShared($threadsShared)
     {
-        $this->threads = $threads;
+        $this->threadsShared = $threadsShared;
 
         return $this;
     }
 
     /**
-     * Method to set the value of field l1_cache_data
+     * Method to set the value of field l1_cache_core
      *
-     * @param integer $l1CacheData
+     * @param integer $l1CacheCore
      * @return $this
      */
-    public function setL1CacheData($l1CacheData)
+    public function setL1CacheCore($l1CacheCore)
     {
-        $this->l1CacheData = $l1CacheData;
+        $this->l1CacheCore = $l1CacheCore;
 
         return $this;
     }
 
     /**
-     * Method to set the value of field l1_cache_instruction
+     * Method to set the value of field l1_cache_shared
      *
-     * @param integer $l1CacheInstruction
+     * @param integer $l1CacheShared
      * @return $this
      */
-    public function setL1CacheInstruction($l1CacheInstruction)
+    public function setL1CacheShared($l1CacheShared)
     {
-        $this->l1CacheInstruction = $l1CacheInstruction;
+        $this->l1CacheShared = $l1CacheShared;
 
         return $this;
     }
 
     /**
-     * Method to set the value of field l2_cache
+     * Method to set the value of field l2_cache_core
      *
-     * @param integer $l2Cache
+     * @param integer $l2CacheCore
      * @return $this
      */
-    public function setL2Cache($l2Cache)
+    public function setL2CacheCore($l2CacheCore)
     {
-        $this->l2Cache = $l2Cache;
+        $this->l2CacheCore = $l2CacheCore;
+
+        return $this;
+    }
+
+    /**
+     * Method to set the value of field l2_cache_shared
+     *
+     * @param integer $l2CacheShared
+     * @return $this
+     */
+    public function setL2CacheShared($l2CacheShared)
+    {
+        $this->l2CacheShared = $l2CacheShared;
+
+        return $this;
+    }
+
+    /**
+     * Method to set the value of field l3_cache_core
+     *
+     * @param integer $l3CacheCore
+     * @return $this
+     */
+    public function setL3CacheCore($l3CacheCore)
+    {
+        $this->l3CacheCore = $l3CacheCore;
 
         return $this;
     }
@@ -221,43 +261,62 @@ class CpuMeta extends IdentificableModel
     }
 
     /**
-     * Returns the value of field l1CacheData
+     * Returns the value of field l1CacheCore
      *
      * @return integer
      */
-    public function getL1CacheData()
+    public function getL1CacheCore()
     {
-        return $this->l1CacheData;
+        return $this->l1CacheCore;
     }
 
     /**
-     * Returns the value of field l1CacheInstruction
+     * Returns the value of field l1CacheShared
      *
      * @return integer
      */
-    public function getL1CacheInstruction()
+    public function getL1CacheShared()
     {
-        return $this->l1CacheInstruction;
+        return $this->l1CacheShared;
     }
 
     /**
-     * Returns the value of field l2Cache
+     * Returns the value of field l2CacheCore
      *
      * @return integer
      */
-    public function getL2Cache()
+    public function getL2CacheCore()
     {
-        return $this->l2Cache;
+        return $this->l2CacheCore;
+    }
+    /**
+     * Returns the value of field l2CacheShared
+     *
+     * @return integer
+     */
+    public function getL2CacheShared()
+    {
+        return $this->l2CacheShared;
     }
 
     /**
-     * Returns the value of field l3Cache
+     * Returns the value of field l3CacheCore
      *
      * @return integer
      */
-    public function getL3Cache()
+    public function getL3CacheCore()
     {
-        return $this->l3Cache;
+        return $this->l3CacheCore;
+    }
+
+    /**
+     * Returns the value of field l3CacheShared
+     *
+     * @return integer
+     */
+    public function getL3CacheShared()
+    {
+        return $this->l3CacheShared;
     }
 
     /**
@@ -313,10 +372,12 @@ class CpuMeta extends IdentificableModel
             'cpu' => 'cpu',
             'cores' => 'cores',
             'threads' => 'threads',
-            'l1_cache_data' => 'l1CacheData',
-            'l1_cache_instruction' => 'l1CacheInstruction',
-            'l2_cache' => 'l2Cache',
-            'l3_cache' => 'l3Cache',
+            'l1_cache_core' => 'l1CacheCore',
+            'l1_cache_shared' => 'l1CacheShared',
+            'l2_cache_core' => 'l2CacheCore',
+            'l2_cache_shared' => 'l2CacheShared',
+            'l3_cache_core' => 'l3CacheCore',
+            'l3_cache_shared' => 'l3CacheShared',
             'clock_speed' => 'clockSpeed',
             'turbo_clock_speed' => 'turboClockSpeed'
         ];
