@@ -6,7 +6,7 @@ use Phalcon\Db\Reference;
 use Phalcon\Db\Adapter\Pdo;
 use Yarak\Migrations\Migration;
 
-class CreateCpuPriceTable implements Migration
+class CreateCpuCodenameTable implements Migration
 {
     /**
      * Run the migration.
@@ -16,56 +16,34 @@ class CreateCpuPriceTable implements Migration
     public function up(Pdo $connection)
     {
         $connection->createTable(
-            'cpu_price',
+            'cpu_codename',
             null,
             [
                 'columns' => [
                     new Column(
                         'id',
                         [
-                            'type' => Column::TYPE_INTEGER, // mediumint
+                            'type' => Column::TYPE_INTEGER,
                             'unsigned' => true,
                             'notNull' => true,
                             'autoIncrement' => true,
-                            'size' => 8,
+                            'size' => 3,
                             'first' => true
                         ]
                     ),
                     new Column(
-                        'processor',
-                        [
-                            'type' => Column::TYPE_INTEGER, // smallint
-                            'unsigned' => true,
-                            'notNull' => true,
-                            'size' => 5,
-                            'after' => 'id'
-                        ]
-                    ),
-                    new Column(
-                        'price',
-                        [
-                            'type' => Column::TYPE_DECIMAL,
-                            'default' => "00.00",
-                            'unsigned' => true,
-                            'notNull' => true,
-                            'size' => 4,
-                            'scale' => 2,
-                            'after' => 'processor'
-                        ]
-                    ),
-                    new Column(
-                        'seller',
+                        'codename',
                         [
                             'type' => Column::TYPE_VARCHAR,
-                            'default' => "Unknown",
                             'notNull' => true,
                             'size' => 30,
-                            'after' => 'price'
+                            'after' => 'id'
                         ]
                     )
                 ],
                 'indexes' => [
-                    new Index('PRIMARY', ['id'], 'PRIMARY')
+                    new Index('PRIMARY', ['id'], 'PRIMARY'),
+                    new Index('codename', ['codename'], 'UNIQUE')
                 ],
                 'options' => [
                     'TABLE_TYPE' => 'BASE TABLE',
@@ -84,6 +62,6 @@ class CreateCpuPriceTable implements Migration
      */
     public function down(Pdo $connection)
     {
-        $connection->dropTable('cpu_price');
+        $connection->dropTable('cpu_codename');
     }
 }

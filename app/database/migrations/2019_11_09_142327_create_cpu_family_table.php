@@ -6,7 +6,7 @@ use Phalcon\Db\Reference;
 use Phalcon\Db\Adapter\Pdo;
 use Yarak\Migrations\Migration;
 
-class CreateCpuManufacturerTable implements Migration
+class CreateCpuFamilyTable implements Migration
 {
     /**
      * Run the migration.
@@ -16,7 +16,7 @@ class CreateCpuManufacturerTable implements Migration
     public function up(Pdo $connection)
     {
         $connection->createTable(
-            'cpu_manufacturer',
+            'cpu_family',
             null,
             [
                 'columns' => [
@@ -27,23 +27,47 @@ class CreateCpuManufacturerTable implements Migration
                             'unsigned' => true,
                             'notNull' => true,
                             'autoIncrement' => true,
-                            'size' => 3,
+                            'size' => 5,
                             'first' => true
                         ]
                     ),
                     new Column(
-                        'manufacturer',
+                        'family',
                         [
                             'type' => Column::TYPE_VARCHAR,
                             'notNull' => true,
                             'size' => 30,
                             'after' => 'id'
                         ]
-                    )
+                    ),
+                    new Column(
+                        'generation',
+                        [
+                            'type' => Column::TYPE_INTEGER,
+                            'unsigned' => true,
+                            'notNull' => true,
+                            'size' => 5,
+                            'after' => 'family'
+                        ]
+                    ),
                 ],
                 'indexes' => [
                     new Index('PRIMARY', ['id'], 'PRIMARY'),
-                    new Index('manufacturer', ['manufacturer'], 'UNIQUE')
+                    new Index('family', ['family', 'generation'], 'UNIQUE'),
+                    new Index('cpu_family_generation_fk', ['generation'], null),
+                ],
+                'references' => [
+                    new Reference(
+                        'cpu_family_generation_fk',
+                        [
+                            'referencedTable' => 'cpu_generation',
+                            'referencedSchema' => 'forge',
+                            'columns' => ['generation'],
+                            'referencedColumns' => ['id'],
+                            'onUpdate' => 'CASCADE',
+                            'onDelete' => 'CASCADE'
+                        ]
+                    ),
                 ],
                 'options' => [
                     'TABLE_TYPE' => 'BASE TABLE',
@@ -62,6 +86,6 @@ class CreateCpuManufacturerTable implements Migration
      */
     public function down(Pdo $connection)
     {
-        $connection->dropTable('cpu_manufacturer');
+        $connection->dropTable('cpu_family');
     }
 }
